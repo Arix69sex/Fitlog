@@ -1,0 +1,18 @@
+{
+  "users": [
+    { "id": 1, "email": "fake@gmail.com", "password": "fake131313", "username": "Arix", "gender": "male", "age": 23, "initial_weight": 69.5, "current_weight": 69.5, "height": 1.76, "activity": "sedentary", "goal": "maintain" },
+    { "id": 2, "email": "tester@gmail.com", "password": "testtesttest123", "username": "Tester", "gender": "male", "age": 18, "initial_weight": 81, "current_weight": 81, "height": 1.81, "activity": "sedentary", "goal": "gain" }
+  ],
+
+  "entries": [
+    { "id": 1, "date": "10/09/2021", "calories_consumed": 2220, "weight": 73, "user_id": 1 },
+    { "id": 2, "date": "11/09/2021", "calories_consumed": 2220, "weight": 73, "user_id": 1 },
+    { "id": 3, "date": "12/09/2021", "calories_consumed": 4000, "weight": 73, "user_id": 1 },
+    { "id": 4, "date": "13/09/2021", "calories_consumed": 2230, "weight": 74.1, "user_id": 1 },
+
+    { "id": 5, "date": "03/12/2021", "calories_consumed": 3100, "weight": 81, "user_id": 2 },
+    { "id": 6, "date": "04/12/2021", "calories_consumed": 2700, "weight": 81.5, "user_id": 2 },
+    { "id": 7, "date": "05/12/2021", "calories_consumed": 3100, "weight": 81.2, "user_id": 2 },
+    { "id": 8, "date": "06/12/2021", "calories_consumed": 2700, "weight": 82.4, "user_id": 2 }
+  ]
+}

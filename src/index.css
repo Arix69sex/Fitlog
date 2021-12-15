@@ -1,0 +1,13 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:focus {
+    outline-color: #063185 ! important;
+    border-color: transparent;
+}
+
+div {
+    -webkit-appearance: none;
+}
