@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../index.css';
 import {useNavigate} from "react-router-dom";
 import { FaBars, FaUserAlt, FaChartBar, FaThLarge, FaSignOutAlt } from "react-icons/fa";
 
 function Nav() {
     const [showDrawer, setShowDrawer] = React.useState(false)
+    const [loggedIn, setLoggedIn] = React.useState(false)
+    const [username, setUsername] = React.useState('')
 
     const navigator = useNavigate();
-    let loggedIn = true;
 
     function navigateToLogin() {
         navigator('/login');
@@ -16,6 +17,26 @@ function Nav() {
     function navigateToSignup() {
         navigator('/signup');
     }
+
+    function navigateToDashboard() {
+        navigator('/dashboard');
+    }
+
+    function logout(){
+        window.localStorage.removeItem('user')
+        navigator('/login');
+        setLoggedIn(false)
+        setShowDrawer(false)
+    }
+
+    useEffect(() => {
+        let user = JSON.parse(window.localStorage.getItem('user'));
+        if (user !== null) {
+            setLoggedIn(true)
+            setUsername(user.username)
+        }
+        else setLoggedIn(false)
+    });
 
     function handleDrawer() {
         if (showDrawer === false) setShowDrawer(true)
@@ -26,14 +47,14 @@ function Nav() {
         return (
             <div className="flex flex-col absolute z-10 w-1/6 h-screen l-0 t-0 bg-deep-blue text-white rounded-r-md">
                 <div className="flex flex-row ml-10 mr-auto text-2xl text-white my-2.5">
-                    <FaBars className="my-1" style={{color: 'white', fontSize: '30px'}} onClick={handleDrawer}/>
+                    <FaBars className="my-1 cursor-pointer" style={{color: 'white', fontSize: '30px'}} onClick={handleDrawer}/>
                     <h3 className="ml-5 mr-auto text-3xl text-white ">
                         <b>FitLog</b>
                     </h3>
                 </div>
 
                 <div className="flex flex-col ml-5 w-4/5 mt-20 mb-auto">
-                    <div className="flex flex-row w-full text-white hover:bg-highlight-blue rounded-md mb-10 mt-14  pl-5 py-2.5">
+                    <div className="flex flex-row w-full text-white hover:bg-highlight-blue rounded-md mb-10 mt-14  pl-5 py-2.5" onClick={navigateToDashboard}>
                         <FaThLarge style={{color: 'white', fontSize: '30px'}}/>
                         <h3 className="text-xl ml-5">Dashboard</h3>
                     </div>
@@ -49,12 +70,11 @@ function Nav() {
                     </div>
                 </div>
 
-                <div className="flex flex-col w-full bg-blue-800 rounded-b-md justify-center">
-                    <div className="flex flex-row w-full text-white rounded-md pl-5 py-7 items-center">
-                        <FaSignOutAlt style={{color: 'white', fontSize: '30px'}}/>
-                        <h3 className="text-2xl ml-10">Username</h3>
-                    </div>
+                <div className="flex flex-row w-4/5 text-white hover:bg-highlight-blue rounded-md mb-10 pl-5 py-2.5 ml-5" onClick={logout}>
+                    <FaSignOutAlt style={{color: 'white', fontSize: '30px'}}/>
+                    <h3 className="text-2xl ml-5">Logout</h3>
                 </div>
+
             </div>
         )
     }
@@ -86,12 +106,14 @@ function Nav() {
             {showDrawer ? navDrawer(): null}
             {showLogo()}
             <div className="flex flex-row">
-                <button className="mx-1 text-xl text-white my-2.5 rounded-md bg-primary-blue h-10 pl-5 pr-5 transition-all duration-500 ease-linear xl:hover:bg-accent-blue" onClick={navigateToLogin}>
+                {!loggedIn ?
+                    <button className="mx-1 text-xl text-white my-2.5 rounded-md bg-primary-blue h-10 pl-5 pr-5 transition-all duration-500 ease-linear xl:hover:bg-accent-blue" onClick={navigateToLogin}>
                     <b>Login</b>
-                </button>
-                <button className="mx-1 text-xl text-white my-2.5 ml-1.5 mr-5 rounded-md bg-primary-blue h-10 pl-5 pr-5 transition-all duration-500 ease-linear xl:hover:bg-accent-blue" onClick={navigateToSignup}>
+                </button>: null}
+                {!loggedIn ?
+                    <button className="mx-1 text-xl text-white my-2.5 ml-1.5 mr-5 rounded-md bg-primary-blue h-10 pl-5 pr-5 transition-all duration-500 ease-linear xl:hover:bg-accent-blue" onClick={navigateToSignup}>
                     <b>Sign Up</b>
-                </button>
+                </button>: null}
             </div>
         </nav>
     )

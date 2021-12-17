@@ -7,6 +7,20 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+router.route('/:email').get((req, res) => {
+    console.log(req.params.email)
+    User.findOne({ email: req.params.email })
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route('/update/:email').put((req, res) => {
+    console.log(req.params.email)
+    User.findOneAndUpdate({ email: req.params.email }, req.body)
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route('/add').post((req, res) => {
     const email = req.body.email;
     const username = req.body.username;

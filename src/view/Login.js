@@ -29,18 +29,39 @@ function Login() {
     }
 
     function onSubmit(e) {
-        console.log(user.username.length)
-        console.log(user.email.length)
-        console.log(user.password.length)
-        if (user.username.length < 4 &&
-            user.email.length < 6 &&
+        if (user.email.length < 6 &&
             user.password.length < 8)
         {
             console.log("Values missing or too short")
         }
         else {
-            axios.post('http://localhost:5000/users/add', user)
-                .then(() => navigator('/first'));
+            console.log(user.email);
+            console.log(user.password);
+            let reqUser = axios.get('http://localhost:5000/users/' + user.email)
+                .then((reqUser) => {
+                    if (reqUser.data.password === user.password){
+                        const savedUser = {
+                            email: reqUser.data.email,
+                            username: reqUser.data.username,
+                            gender: reqUser.data.gender,
+                            age: reqUser.data.age,
+                            height: reqUser.data.height,
+                            weight: reqUser.data.weight,
+                            activity: reqUser.data.activity,
+                            goal: reqUser.data.goal,
+                        }
+                        window.localStorage.setItem('user', JSON.stringify(savedUser));
+                        if (reqUser.data.gender !== '' && reqUser.data.goal !== '') navigator('/dashboard')
+                        else {
+                            if (reqUser.data.gender !== '' && reqUser.data.goal === '') navigator('/goals')
+                            else navigator('/first');
+                        }
+                    }
+                    else {
+                        console.log(reqUser.data)
+                        console.log('Wrong password.')
+                    }
+                });
         }
     }
 
@@ -64,11 +85,13 @@ function Login() {
                     <div className="w-full flex flex-col rounded-r-md bg-gray-300 justify-center items-center">
                         <input className="w-3/5 h-14 border-none rounded-md text-black text-xl mb-10 px-5"
                                type="email"
-                               placeholder="Email*"/>
+                               placeholder="Email*"
+                               onChange={onChangeEmail}/>
                         <input className="w-3/5 h-14 border-none rounded-md text-black text-xl mb-10 px-5"
                                type="password"
-                               placeholder="Password*"/>
-                        <button className="w-48 mx-1 text-xl text-white my-2.5 rounded-md bg-primary-blue h-10 pl-5 pr-5 transition-all duration-500 ease-linear xl:hover:bg-accent-blue" onClick={confirm}><b>Confirm</b></button>
+                               placeholder="Password*"
+                               onChange={onChangePassword}/>
+                        <button className="w-48 mx-1 text-xl text-white my-2.5 rounded-md bg-primary-blue h-10 pl-5 pr-5 transition-all duration-500 ease-linear xl:hover:bg-accent-blue" onClick={onSubmit}><b>Confirm</b></button>
                         <h3 className="text-gray-600 text-sm">Forgot password?</h3>
                     </div>
                 </div>

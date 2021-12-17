@@ -1,25 +1,7 @@
+const entrySchema = require('./entries')
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-
-const entrySchema = new Schema({
-    day: {
-        type: Date,
-        required: true
-    },
-    calories: {
-        type: Number,
-        required: true,
-    },
-    weight: {
-        type: String,
-        required: true,
-        minlength: 8
-    },
-}, {
-    timestamps: true
-});
-
-const Entry = mongoose.model('Entry', entrySchema);
 
 const userSchema = new Schema({
     email: {

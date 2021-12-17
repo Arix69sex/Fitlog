@@ -55,7 +55,20 @@ function Signup() {
        }
        else {
            axios.post('http://localhost:5000/users/add', user)
-               .then(() => navigator('/first'));
+               .then(() => {
+                   const savedUser = {
+                       email: user.email,
+                       username: user.username,
+                       gender: '',
+                       age: 0,
+                       height: 0,
+                       weight:0,
+                       activity: '',
+                       goal: '',
+                   }
+                   window.localStorage.setItem('user', JSON.stringify(savedUser));
+                   navigator('/first');
+               });
        }
     }
 
