@@ -59,5 +59,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "bcrypt": "^5.0.1"
+  }
 }

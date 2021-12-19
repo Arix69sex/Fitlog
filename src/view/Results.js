@@ -70,7 +70,7 @@ function Results() {
 
                     <div className="w-full flex flex-row ">
                         <h3 className="text-3xl mr-24 ml-8 my-5 w-3/6 font-semibold text-gray-600">{results.activity.charAt(0).toUpperCase() + results.activity.slice(1)}</h3>
-                        <h3 className="text-3xl mr-24 my-5 w-3/6 text-gray-500">{results.activity_cal} calories per day</h3>
+                        <h3 className="text-3xl mr-24 my-5 w-3/6 text-gray-500">{results.BMR + results.activity_cal} calories per day</h3>
                     </div>
 
                     <div className="w-full flex flex-row ">

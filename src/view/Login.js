@@ -37,7 +37,7 @@ function Login() {
         else {
             console.log(user.email);
             console.log(user.password);
-            let reqUser = axios.get('http://localhost:5000/users/' + user.email)
+            let reqUser = axios.post('http://localhost:5000/users/login', user)
                 .then((reqUser) => {
                     if (reqUser.data.password === user.password){
                         const savedUser = {
@@ -66,10 +66,6 @@ function Login() {
     }
 
     const navigator = useNavigate();
-
-    function confirm() {
-        navigator('/first');
-    }
 
     return (
         <div className="w-screen h-screen flex flex-row justify-center items-center bg-primary-grey">

@@ -44,9 +44,6 @@ function Signup() {
     }
 
     function onSubmit(e) {
-        console.log(user.username.length)
-        console.log(user.email.length)
-        console.log(user.password.length)
        if (user.username.length < 4 &&
            user.email.length < 6 &&
            user.password.length < 8)
@@ -54,7 +51,7 @@ function Signup() {
            console.log("Values missing or too short")
        }
        else {
-           axios.post('http://localhost:5000/users/add', user)
+           axios.post('http://localhost:5000/users/signup', user)
                .then(() => {
                    const savedUser = {
                        email: user.email,
