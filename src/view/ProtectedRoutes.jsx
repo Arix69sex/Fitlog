@@ -9,7 +9,7 @@ const useAuth = () => {
 }
 const ProtectedRoutes = (props) => {
     const isAuth = useAuth();
-    if (props.state == "true") return isAuth ? <Outlet /> : <Navigate to="/login" />
+    if (props.state == "true") return isAuth ? <Outlet /> : <Navigate to="/landing" />
     else return !isAuth ? <Outlet /> : <Navigate to="/dashboard" />
 }
 

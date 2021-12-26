@@ -14,7 +14,12 @@ module.exports = {
         'highlight-blue': '#094BCC',
         'deep-blue': '#002264',
 
-        'primary-grey': '#313131'
+        'grad-start': '#12284D',
+        'grad-mid': '#16A1CD',
+        'grad-end': '#084BCC',
+
+        'primary-grey': '#313131',
+        'dark-gray': '#1D1D1D'
       }
     },
   },

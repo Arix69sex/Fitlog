@@ -39,7 +39,8 @@ function Login() {
             console.log(user.password);
             let reqUser = axios.post('http://localhost:5000/users/login', user)
                 .then((reqUser) => {
-                    if (reqUser.data.password === user.password){
+                    console.log(reqUser)
+                    if (reqUser.data !== null ){
                         const savedUser = {
                             email: reqUser.data.email,
                             username: reqUser.data.username,
@@ -58,7 +59,7 @@ function Login() {
                         }
                     }
                     else {
-                        console.log(reqUser.data)
+                        console.log(reqUser.request.status )
                         console.log('Wrong password.')
                     }
                 });
@@ -70,15 +71,15 @@ function Login() {
     return (
         <div className="w-screen h-screen flex flex-row justify-center items-center bg-primary-grey">
 
-                <div className="w-3/5 h-3/5 flex flex-row rounded-md justify-center align-center">
+                <div className="w-4/5 md:w-3/5 h-full md:h-3/5 flex flex-col md:flex-row rounded-md justify-center align-center">
 
-                    <div className="w-2/6 rounded-l-md bg-white flex justify-center items-center">
-                        <h1 className="text-8xl px-10">
+                    <div className="rounded-t-md md:w-2/6 md:rounded-l-md md:rounded-r-none bg-white flex justify-center items-center">
+                        <h1 className="text-6xl py-10 2xl:px-10">
                             Login
                         </h1>
                     </div>
 
-                    <div className="w-full flex flex-col rounded-r-md bg-gray-300 justify-center items-center">
+                    <div className="w-full flex flex-col rounded-b-md md:rounded-r-md md:rounded-l-none bg-gray-300 justify-center items-center py-14">
                         <input className="w-3/5 h-14 border-none rounded-md text-black text-xl mb-10 px-5"
                                type="email"
                                placeholder="Email*"
